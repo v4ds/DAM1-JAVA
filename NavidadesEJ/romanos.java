@@ -128,7 +128,6 @@ public class romanos {
 				}
 				resultado += romanos[pos];
 				resultado += "D";
-				numero -= 400;
 			} else if (numero >= 100) {
 				resultado += "C";
 				numero = numero - 100;
