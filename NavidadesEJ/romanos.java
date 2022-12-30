@@ -89,45 +89,23 @@ public class romanos {
 	
 	// fin pasar a arabiga
 
-	
-	// le pasamos un numero en forma de string y nos devuelve la posicion
-	public static int getRoman(String numero) {
-		String[] valores = {"1", "5", "10", "50", "100", "500", "1000"};
-		int resultado = 0;
-		
-		for (int i = 0; i < valores.length; i++) {
-			if (numero.equals(valores[i])) {
-				resultado = i;
-			}
-		}
-		return resultado;
-	}
-	
 	// calcular romano
-	
 	public static String calcularRomano(int numero) {
-		// obtenemos un romano mediante la posicion que nos devuelve getRoman() con un numero que nosotros le damos
-		String[] romanos = {"I", "V", "X", "L", "C", "D", "M"};
 		String resultado = "";
 		
 		do {
 			if (numero >= 1000) {
 				resultado += "M";
 				numero = numero - 1000;
+			} else if (numero >= 900) {
+				resultado += "CM";
+				numero = numero - 900;
 			} else if (numero >= 500) {
 				resultado += "D";
 				numero = numero - 500;
 			} else if (numero >= 400) {
-				int pos = 0;
-				if (numero == 400) {
-					pos = getRoman(String.format("%d", 500 - numero));
-					numero -= numero;
-				} else {					
-					pos = getRoman(String.format("%d", 500 - (numero - (numero - 400))));
-					numero -= numero - (50 - numero);
-				}
-				resultado += romanos[pos];
-				resultado += "D";
+				resultado += "CD";
+				numero -= 400;
 			} else if (numero >= 100) {
 				resultado += "C";
 				numero = numero - 100;
@@ -135,27 +113,20 @@ public class romanos {
 				resultado += "L";
 				numero = numero - 50;
 			} else if (numero >= 40) {
-				int pos = 0;
-				if (numero == 40) {
-					pos = getRoman(String.format("%d", 50 - numero));
-					numero -= numero;
-				} else {					
-					pos = getRoman(String.format("%d", 50 - (numero - (50 - numero))));
-					numero -= numero - (50 - numero);
-				}
-				resultado += romanos[pos];
-				resultado += "L";
+				resultado += "XL";
+				numero -= 40;
 			} else if (numero >= 10) {
 				resultado += "X";
 				numero = numero - 10;
+			} else if (numero == 9) {
+				numero = numero - 9;
+				resultado += "IX";
 			} else if (numero >= 5) {
 				numero = numero - 5;
 				resultado += "V";
-			} else if (numero > 3) {
-				int pos = getRoman(String.format("%d", 5 - (numero - (5 - numero))));
-				resultado += romanos[pos];
-				resultado += "V";
-				numero -= numero - (3 - numero);
+			} else if (numero == 4) {
+				resultado += "IV";
+				numero = numero - 4;
 			} else if (numero <= 3) {
 				numero = numero - 1;
 				resultado += "I";
